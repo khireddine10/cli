@@ -1,0 +1,27 @@
+- name: Docker host configuration
+  remote_user: root
+  become: yes
+  hosts: all
+  vars:
+    path: /etc/checks
+    time: "{{ lookup('pipe', 'date -d \"1 day ago\" +\"%Y%m%d\"') }}"
+  tasks:
+    - name: Delete file
+      file:
+              state: absent
+              path: /tmp/log1-{{ inventory_hostname }}-{{ time }}
+    - name: executing CIS number 1
+      shell: "{{ path }}/check1.{{ item }} >> /tmp/log1-{{ inventory_hostname }}-{{ time }}"
+      loop:
+        - 1.1
+        - 1.2
+        - 1.3
+        - 1.4
+        - 1.5
+        - 1.6
+        - 1.7
+        - 1.8
+        - 1.9
+        - 1.10
+        - 2.1
+        - 2.2

@@ -1,0 +1,39 @@
+- name: Docker host configuration
+  hosts: all
+  become: yes
+  remote_user: root
+  vars:
+    path: /etc/checks
+    time: "{{ lookup('pipe', 'date -d \"1 day ago\" +\"%Y%m%d\"') }}"
+  tasks:
+    - name: Delete file
+      file:
+              state: absent
+              path: /tmp/log2-{{ inventory_hostname }}-{{ time }}
+    - name: executing CIS number 2
+      shell: "{{ path }}/check2.{{ item }} >> /tmp/log2-{{ inventory_hostname }}-{{ time }}"
+      loop:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+    - name: copy file from remote server
+      fetch:
+              src: /tmp/log2-{{ inventory_hostname }}-{{ time }}
+              dest: /etc/cli/cis-logs/log2-{{ inventory_hostname }}-{{ time }}
+              mode: 0774
+              flat: yes

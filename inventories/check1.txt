@@ -1,0 +1,1 @@
+192.168.1.104 ansible_ssh_pass=cyber123 ansible_ssh_user=khirou ansible_sudo_pass=cyber123

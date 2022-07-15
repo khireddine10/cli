@@ -1,0 +1,2 @@
+192.168.238.40 ansible_ssh_pass=cyber123 ansible_ssh_user=khirou ansible_sudo_pass=cyber123
+127.0.0.1 ansible_ssh_pass=securityA123* ansible_ssh_user=khirou ansible_sudo_pass=securityA123*
